@@ -1,0 +1,21 @@
+For both the JAVA and PYTHON file, it has the same approach:
+
+- Basically, you check the values of BOTH "p" and "q"
+- THEN you compare it with the root's value
+
+- If they're BOTH less than the root's value...
+  - You would ONLY need to search through the LEFT subtree
+    - (because the thing we need to return is in the LEFT subtree ONLY,
+       so there's no need to search anywhere else)
+  - So recurse through the LEFT subtree
+
+- If they're BOTH greater than the root's value...
+  - You would ONLY need to search through the RIGHT subtree
+    - (Because the thing we need to return is in the RIGHT subtree ONLY,
+       so there's no need to search anywhere else)
+  - So recurse through the RIGHT subtree
+
+- If they're anything ELSE...
+  (i.e. one of them is equal to the root)
+  (OR one is less than and the other is greater than)
+    - Just return the root

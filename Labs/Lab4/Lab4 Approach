@@ -1,0 +1,21 @@
+For both the JAVA and Python versions, it's pretty much the same approach:
+
+- We're trying to invert the tree, so we need to swap the nodes around
+- To start off, we need to see if the root is null
+  - This is because what if we don't have a root or we reached the end of the tree or
+    we don't have a subtree to traverse through (in other words, what if we have a tree 
+    that doesn't have a left or right subtree or just doesn't have a root in general)
+  - The base case handles that
+- By declaring the null root BEFOREHAND, we don't have to worry about those kinds of scenarios
+  since we can already handle those with the base case
+
+- Next, we need to iterate through the left and right children of the root
+  - Recursing through the tree allows us to traverse through the tree, which is really important
+    for inverting through the tree
+
+- Finally, we can swap the terms together and here's the interesting part about swapping
+  - If we swap the parents, the children actually swap WITH the parents
+  - This is because the children are like linked lists, in which they're stored
+  - So this means when you swap, the children and parents are on opposite sides
+    - So this carries out the problem of needing to swap the children (because they're 
+      already swapped with the parents)

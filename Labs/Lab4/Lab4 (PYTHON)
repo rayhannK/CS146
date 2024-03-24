@@ -1,0 +1,32 @@
+class TreeNode(object):
+
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+
+        self.left = left
+
+        self.right = right
+
+    def invertTree(self, root):
+        if root == None:
+            return None
+
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+
+        return root
+
+leftLeft = TreeNode(3)
+leftRight = TreeNode(4)
+rightLeft = TreeNode(5)
+rightRight = TreeNode(6)
+
+leftSubTree = TreeNode(2, leftLeft, leftRight)
+rightSubTree = TreeNode(8, rightLeft, rightRight)
+tree = TreeNode(1, leftSubTree, rightSubTree)
+
+print("The root of the tree is", tree.invertTree(tree).val)

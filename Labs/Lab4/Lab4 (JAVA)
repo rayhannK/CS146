@@ -1,0 +1,38 @@
+public class Lab4 {
+    //get the root --> only thing that staying the same
+    //swap the nodes @ the same level
+        //if left child & right child exists... --> swap
+    //then go down -->
+        //if left child of 1st node exists & right child of 2nd node exists...
+            //u swap them
+        //if right child of 1st node exists & left child of 2nd node exists...
+            //u swap them
+
+    public static TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        invertTree(root.left);
+        invertTree(root.right);
+
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        return root;
+    }
+
+    public static void main(String[] args) {
+        TreeNode leftLeft = new TreeNode(3);
+        TreeNode leftRight = new TreeNode(4);
+        TreeNode rightLeft = new TreeNode(5);
+        TreeNode rightRight = new TreeNode(6);
+
+        TreeNode leftSubTree = new TreeNode(2, leftLeft, leftRight);
+        TreeNode rightSubTree = new TreeNode(8, rightLeft, rightRight);
+        TreeNode tree = new TreeNode(1, leftSubTree, rightSubTree);
+
+        System.out.println(invertTree(tree).val);
+    }
+}

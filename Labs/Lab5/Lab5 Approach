@@ -1,0 +1,21 @@
+So my JAVA and Python implementations aren't the most efficient by any means, but they should work for most test cases (I think)
+
+This is how they work:
+- They create stacks for 4 scenarios
+  - i.e. leftSubTree, rightSubTree, stackLeft, stackRight
+
+- The biggest problem with my approach is with comparing the root AND the parent
+  - ex: if the left subtree is less than the root, BUT ALSO if it's LESS THAN its parents
+    - this is exactly why there's so many if-statements
+- If they're less than or greater than the parents when they shouldn't be...
+  - It returns false because they aren't valid BSTs
+
+- If they aren't less than or greater than the parents when they shouldn't be...
+  - (i.e. they are less than or greater than the parents)...
+  - We compare them with the root by looping through 2 stacks
+    - i.e. leftSubTree and rightSubTree
+  - If they're greater than or less than when they shouldn't be...
+    - We return false because they aren't valid BSTs
+
+- Finally, if they do have the value specifications...
+  - We return true because they should be valid BSTs

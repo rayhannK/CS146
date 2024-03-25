@@ -1,0 +1,107 @@
+class TreeNode(object):
+
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+
+        self.left = left
+
+        self.right = right
+
+    def isValidBST(self, root):
+        leftSubTree = []
+        rightSubTree = []
+        stackLeft = []
+        stackRight = []
+
+        if (root.left is None and root.right is None):
+            return True
+
+        if root.left is not None:
+            if root.left.val < root.val:
+                stackLeft.append(root.left)
+            else:
+                return False
+
+        while not stackLeft:
+            currLeft = stackLeft.pop()
+            leftSubTree.append(currLeft)
+
+            if currLeft.left is None or currLeft.right is None:
+                if currLeft.left is not None:
+                    if currLeft.left.val > currLeft.val:
+                        return False
+                    else:
+                        leftSubTree.append(currLeft.left)
+                elif currLeft.right is not None:
+                    if currLeft.right.val < currLeft.val:
+                        return False
+                    else:
+                        leftSubTree.append(currLeft.right)
+            else:
+                if currLeft.left.val > currLeft.val:
+                    return False
+                else:
+                    leftSubTree.append(currLeft.left)
+                if currLeft.right.val < currLeft.val:
+                    return False
+                else:
+                    leftSubTree.append(currLeft.right)
+
+        if root.right is not None:
+            if (root.right.val > root.val):
+                stackRight.append(root.right)
+            else:
+                return False
+
+        while not stackRight:
+            currRight = stackRight.pop()
+            rightSubTree.push(currRight)
+
+            if currRight.left is None or currRight is None:
+                if currRight.left is not None:
+                    if currRight.left.val > currRight.val:
+                        return False
+                    else:
+                        rightSubTree.append(currRight.left)
+                elif currRight.right is not None:
+                    if currRight.right.val < currRight.val:
+                        return False
+                    else:
+                        rightSubTree.append(currRight.right)
+            else:
+                if currRight.left.val > currRight.val:
+                    return False
+                else:
+                    rightSubTree.append(currRight.left)
+                if currRight.right.val < currRight.val:
+                    return False
+                else:
+                    rightSubTree.append(currRight.right)
+
+        for curr in leftSubTree:
+            if curr.val > root.val:
+                return False
+
+        for curr in rightSubTree:
+            if curr.val < root.val:
+                return False
+
+        return True
+
+# leftLeft = TreeNode(3)
+# leftRight = TreeNode(7)
+# rightRight = TreeNode(20)
+#
+# leftSubTree = TreeNode(5, leftLeft, leftRight)
+# rightSubTree = TreeNode(15, None, rightRight)
+# tree = TreeNode(10, leftSubTree, rightSubTree)
+
+leftLeft = TreeNode(1)
+rightLeft = TreeNode(12)
+rightRight = TreeNode(12)
+
+leftSubTree = TreeNode(3, leftLeft, None)
+rightSubTree = TreeNode(15, rightLeft, rightRight)
+tree = TreeNode(10, leftSubTree, rightSubTree)
+
+print("Valid BST?", tree.isValidBST(tree))

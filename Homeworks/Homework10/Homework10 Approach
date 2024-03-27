@@ -1,0 +1,21 @@
+For this, it just implements the Breadth-First Search algorithm
+
+- So this first creates the list of list of integers (which is the thing you're returning)
+- THEN this creates the queue of TreeNodes
+
+- It first checks if the root is null, which returns the empty list of list of integers
+- If it's not empty...
+  - It adds the root to another list
+  - We can then add THAT list to the "list-we-want-to-return"
+
+- Next we go through a while loop that says while it's not empty...
+   - We create a list of integers that checks each level
+   - THEN we go through a for loop that goes through the queue's size amount of times:
+     - We get the first element and check if it has a left and right child
+       - If it does, we add them to level and push it into the queue
+     - We do this because doing this gets all the children at the same level, in which we add them to the list
+   - If the level list is not empty...
+     - We add that a copy of that to the "list-we-want-to-return"
+     - We do this because we don't want add any changes to that list because that holds all the children
+
+- Finally we return the nodes or the list of list of integers

@@ -1,1 +1,58 @@
+package Homework;
 
+import Homework.TreeNode.TreeNode;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class Homework10 {
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> nodes = new ArrayList<>();
+        Queue<TreeNode> current = new LinkedList<>(); //use a queue..?
+
+        if (root == null) {
+            return nodes;
+        }
+
+        List<Integer> addRoot = new ArrayList<>();
+        addRoot.add(root.val);
+        nodes.add(addRoot);
+
+        current.add(root);
+
+        while (!current.isEmpty()) {
+            List<Integer> level = new ArrayList<>();
+            int size = current.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode comparedNode = current.poll();
+                if (comparedNode.left != null) {
+                    level.add(comparedNode.left.val);
+                    current.add(comparedNode.left);
+                }
+                if (comparedNode.right != null) {
+                    level.add(comparedNode.right.val);
+                    current.add(comparedNode.right);
+                }
+            }
+            if (!level.isEmpty()) {
+                nodes.add(new ArrayList<>(level));
+            }
+
+        }
+
+        return nodes;
+    }
+
+    public static void main(String[] args) {
+        TreeNode leftLeft = new TreeNode(1);
+        TreeNode rightLeft = new TreeNode(5);
+        TreeNode rightRight = new TreeNode(9);
+        TreeNode leftSubTree = new TreeNode(3, leftLeft, null);
+        TreeNode rightSubTree = new TreeNode(8, rightLeft, rightRight);
+        TreeNode root = new TreeNode(4, leftSubTree, rightSubTree);
+        System.out.println(levelOrder(root));
+
+    }
+}

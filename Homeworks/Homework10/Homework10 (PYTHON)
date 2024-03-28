@@ -1,1 +1,40 @@
+class TreeNode(object):
 
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+
+        self.left = left
+
+        self.right = right
+
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        current = deque([root])
+        nodes = [[root.val]]
+
+        while current:
+            level = []
+            size = len(current)
+            for node in size:
+                comparedNode = current.popLeft()
+                if comparedNode.left is not None:
+                    current.append(comparedNode.left)
+                    level.append(comparedNode.left)
+                if comparedNode.right is not None:
+                    current.append(comparedNode.right)
+                    level.append(comparedNode.right)
+            if level:
+                nodes.append(level.copy())
+
+        return nodes
+
+leftLeft = TreeNode(1)
+rightLeft = TreeNode(5)
+rightRight = TreeNode(9)
+leftSubTree = TreeNode(3, leftLeft, None)
+rightSubTree = TreeNode(8, rightLeft, rightRight)
+tree = TreeNode(4, leftSubTree, rightSubTree)
+
+print(tree.levelOrder())

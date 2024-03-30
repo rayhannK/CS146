@@ -1,0 +1,12 @@
+For both the JAVA and Python version, I'm going to use the BFS strategy of floodfill
+
+Basically, you're supposed to do find the 4 directionally pixels of the starting pixel and fill in the color, 
+so we can use the BFS strategy to accomplish this:
+
+This is what you do...
+- Create a visited list (this is where you'll put in the pixels you already visited)
+- Create a queue and a list of neighbors (at least for my program)
+
+- Then iterate through the entire image and if it reaches the point[sr][sc]...
+  - Keep track of its original value since that point specifcally will eventually change...
+  - 

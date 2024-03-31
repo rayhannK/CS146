@@ -9,4 +9,16 @@ This is what you do...
 
 - Then iterate through the entire image and if it reaches the point[sr][sc]...
   - Keep track of its original value since that point specifcally will eventually change...
-  - 
+  - Then you basically do the Breadth-First Search algorithm...
+
+  - You add the coordinates of the points in the queue and poll it
+  - Then you get the individual x and y coordinates of the point
+  - Then you check all 4 directionality of the point and see if it's within the range of the grid
+    and if it has the original value or the new value (which is the color)
+    - If it is, then you add it to a list of neighbors and change it to have that color
+
+  - Once you have that, you go through the list of neighbors
+    - If they haven't been visited yet, you can add them to the list of visited (or make the visited a 2D array
+      with boolean values and see if the point at that value is true or not)
+    - Then you clear the neighbors
+  - Finally, you repeat this step until the queue is empty

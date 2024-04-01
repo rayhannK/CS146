@@ -1,0 +1,54 @@
+from collections import deque
+
+class Homework11:
+    def floodFill(self, image, sr, sc, color):
+        visited = [[False for i in range(len(image[0]))] for j in range(len(image))]
+        queue = deque()
+        neighbors = []
+
+        queue.append((sr, sc))
+        originalVal = image[sr][sc]
+        visited[sr][sc] = True
+        image[sr][sc] = color
+
+        while queue:
+            currY, currX = queue.popleft()
+
+            if (((currX - 1) >= 0 and image[currY][currX - 1] == originalVal) or
+                    ((currX - 1) >= 0) and image[currY][currX - 1] == color):
+                neighbors.append((currY, currX - 1))
+                image[currY][currX - 1] = color
+
+            if (((currX + 1) < len(image[0]) and image[currY][currX + 1] == originalVal) or
+                    ((currX + 1) < len(image[0])) and image[currY][currX + 1] == color):
+                neighbors.append((currY, currX + 1))
+                image[currY][currX + 1] = color
+
+            if (((currY - 1) >= 0 and image[currY - 1][currX] == originalVal) or
+                    ((currY - 1) >= 0 and image[currY - 1][currX] == color)):
+                neighbors.append((currY - 1, currX))
+                image[currY - 1][currX] = color
+
+            if (((currY + 1) < len(image) and image[currY + 1][currX] == originalVal) or
+                    ((currY + 1) < len(image) and image[currY + 1][currX] == color)):
+                neighbors.append((currY + 1, currX))
+                image[currY + 1][currX] = color
+
+            for k in neighbors:
+                kY, kX = k
+
+                if not visited[kY][kX]:
+                    visited[kY][kX] = True
+                    queue.append(k)
+
+            neighbors.clear()
+
+        return image
+
+image = [
+    [1, 1, 1],
+    [1, 1, 0],
+    [1, 0, 1]
+]
+output = Homework11()
+print(output.floodFill(image, 1, 1, 2))

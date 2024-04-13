@@ -1,0 +1,53 @@
+package Labs;
+
+public class Lab6 {
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (numCourses < prerequisites.length) {
+            return false;
+        }
+        if (prerequisites.length == 1) {
+            return true;
+        }
+        boolean[][] matrix = new boolean[prerequisites.length][prerequisites.length];
+        for (int i = 0; i < matrix.length; i++) {
+            int prereq = prerequisites[i][1];
+            int course = prerequisites[i][0];
+            if (prereq > 0 && course > 0) {
+                matrix[prereq - 1][course - 1] = true;
+            }
+            else {
+                matrix[prereq][course] = true;
+            }
+            //this = ur adjacency matrix
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j]) {
+                    if ((i - 1 >= 0 && j - 1 >= 0) && matrix[i - 1][j - 1]) { //upper left corner
+                        return false;
+                    }
+                    if ((i + 1 < matrix.length && j - 1 >= 0) && matrix[i + 1][j - 1]) { //upper right corner
+                        return false;
+                    }
+                    if ((i - 1 >= 0 && j + 1 < matrix.length) && matrix[i - 1][j + 1]) { //lower left corner
+                        return false;
+                    }
+                    if ((i + 1 < matrix.length && j + 1 < matrix.length) && matrix[i + 1][j + 1]) { //lower right corner
+                        return false;
+                    }
+                    //check all four corners and if one of them is true, there's a cycle
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int numCourses = 2;
+        int[][] prerequisites = {
+                {0, 1}
+        };
+        System.out.println(canFinish(numCourses, prerequisites));
+    }
+}

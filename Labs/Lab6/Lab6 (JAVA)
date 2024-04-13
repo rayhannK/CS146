@@ -5,7 +5,7 @@ public class Lab6 {
         if (numCourses < prerequisites.length) {
             return false;
         }
-        if (prerequisites.length == 1) {
+        if (numCourses >= prerequisites.length && prerequisites.length == 1) {
             return true;
         }
         boolean[][] matrix = new boolean[prerequisites.length][prerequisites.length];

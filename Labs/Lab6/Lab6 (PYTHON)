@@ -1,0 +1,36 @@
+def canFinish(numCourses, prerequisites):
+    n = len(prerequisites)
+    if (numCourses < n):
+        return False
+    if (numCourses >= n and n == 1):
+        return True
+
+    matrix = [[False] * n for i in range(n)]
+    for i in range(n):
+        prereq = prerequisites[i][1]
+        course = prerequisites[i][0]
+        if (prereq > 0 and course > 0):
+            matrix[prereq - 1][course - 1] = True
+        else:
+            matrix[prereq][course] = True
+
+    for i in range(n):
+        for j in range(n):
+            if (matrix[i][j]):
+                if (i - 1 >= 0 and j - 1 >= 0) and matrix[i - 1][j - 1]:
+                    return False
+                if (i + 1 < n and j - 1 >= 0) and matrix[i + 1][j - 1]:
+                    return False
+                if (i - 1 >= 0 and j + 1 < n) and matrix[i - 1][j + 1]:
+                    return False
+                if (i + 1 < n and j + 1 < n) and matrix[i + 1][j + 1]:
+                    return False
+
+    return true
+
+prerequisites = [
+    [1, 2],
+    [2, 3],
+    [3, 1]
+]
+print(canFinish(5, prerequisites))

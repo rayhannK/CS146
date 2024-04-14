@@ -1,0 +1,27 @@
+def minCostOfToSupplyWater(self, n: int, wells: list[int], pipes: list[list[int]]) -> int:
+    matrix = [[0 for i in range(n)] for j in range(n)]
+
+    for i in range(n):
+        matrix[i][i] = wells[i]
+
+    minCost = float('inf')
+    lowestCostPoint = 0
+    for i in range(len(pipes)):
+        if (pipes[i][2] < minCost):
+            minCost = pipes[i][2]
+            lowestCostPoint = i
+
+    xCoord = pipes[lowestCostPoint][1]
+    yCoord = pipes[lowestCostPoint][0]
+    matrix[xCoord - 1][yCoord - 1] = minCost
+
+    cost = 0
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] != 0:
+                cost += matrix[i][j]
+    return cost - 1
+
+wells = [1, 1]
+pipes = [[1, 2, 1], [1, 2, 2]]
+print(minCostOfToSupplyWater(2, wells, pipes))

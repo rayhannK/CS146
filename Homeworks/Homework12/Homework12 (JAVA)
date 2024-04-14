@@ -1,0 +1,51 @@
+package Homework;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Homework12 {
+    public static int minCostToSupplyWater(int n, int[] wells, int[][] pipes) {
+        int[][] matrix = new int[n][n]; //this = representing the graph
+            //0 = meaning no edge, any other number is an weight (i.e. cost)
+            //wells value = representing diagonal points
+                //i.e. wells[0] = (0, 0), wells[1] = (1, 1), wells[2] = (2, 2), etc.
+        int min = Integer.MAX_VALUE;
+        int lowestCostPoint = 0;
+        for (int i = 0; i < pipes.length; i++) {
+            //finding the smallest value
+            if (pipes[i][2] < min) {
+                min = pipes[i][2];
+                lowestCostPoint = i;
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (i == j) {
+                    matrix[i][j] = wells[i];
+                }
+            }
+        }
+        int xCoord = pipes[lowestCostPoint][1];
+        int yCoord = pipes[lowestCostPoint][0];
+        matrix[xCoord - 1][yCoord - 1] = min;
+
+        int cost = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] != 0) {
+                    cost += matrix[i][j];
+                }
+            }
+        }
+        return cost - 1;
+    }
+
+    public static void main(String[] args) {
+        int[] wells = {1, 1};
+        int[][] pipes = {
+                {1, 2, 1},
+                {1, 2, 2}
+        };
+        System.out.println(minCostToSupplyWater(2, wells, pipes));
+    }
+}

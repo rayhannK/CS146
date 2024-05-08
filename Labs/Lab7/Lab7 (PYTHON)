@@ -1,0 +1,18 @@
+def coinChange(self, coins: List[int], amount: int) -> int:
+    if amount == 0:
+        return -1
+
+    list = []
+    for i in range(amount + 1):
+        list[i] = 99999999
+
+    list[0] = 0
+
+    for i in range(len(coins)):
+        for j in range(i, amount + 1):
+            coinList[j] = min(coinList[j], coinList[j - i] + 1)
+
+    if coinList[amount] > amount:
+        return -1
+    
+    return coinList[amount]

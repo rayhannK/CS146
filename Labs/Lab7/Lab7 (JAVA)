@@ -1,0 +1,36 @@
+package Labs;
+
+public class Lab8 {
+    public static int coinChange(int[] coins, int amount) {
+        if (amount == 0) {
+            return -1;
+        }
+
+        int[] coinList = new int[amount + 1];
+        //this is so that we can keep track of the money we are combining to combine them to the target amount
+
+        for (int i = 0; i < coinList.length; i++) {
+            coinList[i] = Integer.MAX_VALUE;
+            //this is so that we can have a placeholder to see what we can do with the coins given
+        }
+
+        coinList[0] = 0;
+        //this is what's allowing us to start combining coins for different combinations
+
+        for (int i = 0; i < coins.length; i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                coinList[j] = Math.min(coinList[j], coinList[(j - coins[i])] + 1);
+            }
+        }
+
+        if (coinList[amount] > amount) {
+            return -1;
+        }
+        return coinList[amount];
+    }
+
+    public static void main(String[] args) {
+        int[] coins = {1, 2, 5};
+        System.out.println(coinChange(coins, 11));
+    }
+}
